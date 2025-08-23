@@ -38,7 +38,7 @@ cd /var/www
 
 if [ ! -d /var/www/front-build ]; then
     wget https://github.com/kuole-o/api/archive/refs/heads/main.tar.gz
-    tar xvf main.tar.gz && mv DailyHot-main front-build
+    tar xvf main.tar.gz && mv api-main front-build
     rm -f main.tar.gz
 fi
 
