@@ -1,6 +1,6 @@
 FROM node:alpine
 
-LABEL version="1.0.7" \
+LABEL version="1.0.8" \
       maintainer="guole.fun@qq.com"
 
 # 设置时区
