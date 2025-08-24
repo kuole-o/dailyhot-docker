@@ -1,6 +1,6 @@
 FROM node:alpine
 
-LABEL version="1.0.1" \
+LABEL version="1.0.2" \
       maintainer="guole.fun@qq.com"
 
 # 设置时区和语言环境，解决中文乱码问题
