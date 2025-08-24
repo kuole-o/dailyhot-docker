@@ -4,11 +4,9 @@ LABEL version="1.0.1" \
       maintainer="guole.fun@qq.com"
 
 # 设置时区和语言环境，解决中文乱码问题
-RUN apk add --no-cache tzdata \
+RUN apk add --no-cache tzdata musl-locales \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
-    && apk add --no-cache locales \
-    && locale-gen zh_CN.UTF-8 \
     && apk del tzdata
 
 # 基础环境变量
