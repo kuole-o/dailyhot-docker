@@ -1,6 +1,6 @@
 FROM node:alpine
 
-LABEL version="1.0.4" \
+LABEL version="1.0.5" \
       maintainer="guole.fun@qq.com"
 
 # 设置时区
@@ -17,7 +17,7 @@ ENV LANG=zh_CN.UTF-8 \
     APP_COPYRIGHT=Example\
     APP_COPYRIGHT_URL=http://www.example.org\
     USE_LOG_FILE=true\
-    ALLOWED_DOMAIN=["www.guole.fun","blog.guole.fun","hot.guole.fun","api.guole.fun","guole.fun","kuole-o.github.io","127.0.0.1"]
+    ALLOWED_DOMAIN='["www.guole.fun","blog.guole.fun","hot.guole.fun","api.guole.fun","guole.fun","kuole-o.github.io","127.0.0.1"]'
 
 ADD initfs /tmp
 RUN sh /tmp/deploy
@@ -25,4 +25,4 @@ RUN sh /tmp/deploy
 VOLUME [ "/logs" ]
 ENTRYPOINT ["/sbin/entrypoint"]
 
-EXPOSE 80
+EXPOSE 8859

@@ -7,7 +7,7 @@
 使用如下代码启动后，浏览器打开 <http://www.example.org> 查看WEB界面，打开 <http://www.example.org/api/all> 查看所有接口。
 
 ```shell
-docker run -d -p 80 \
+docker run -d -p 8859 \
     -e APP_ICP="京备ICP12345" \
     -e APP_COPYRIGHT="Example" \
     -e APP_COPYRIGHT_URL="http://www.example.org" \
@@ -16,7 +16,7 @@ docker run -d -p 80 \
 
 ## 主要更新
 
-- 合并前端和后端到一个容器
+<!-- - 合并前端和后端到一个容器 -->
 - 支持修改前端参数
 
 ## 其他
