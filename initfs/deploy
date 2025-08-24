@@ -33,30 +33,31 @@ mkdir -p /var/www/api/logs
 rm -rf /var/www/api-build
 
 ######
+#   前端构建单独部署，放到这里最终得要端口号才能访问，不方便
 
-cd /var/www
+# cd /var/www
 
-if [ ! -d /var/www/front-build ]; then
-    wget https://github.com/kuole-o/api/archive/refs/heads/main.tar.gz
-    tar xvf main.tar.gz && mv api-main front-build
-    rm -f main.tar.gz
-fi
+# if [ ! -d /var/www/front-build ]; then
+#     wget https://github.com/kuole-o/dailyhot/archive/refs/heads/main.tar.gz
+#     tar xvf main.tar.gz && mv dailyhot-main front-build
+#     rm -f main.tar.gz
+# fi
 
-cd /var/www/front-build
+# cd /var/www/front-build
 
-sed -i "s|Copyright By|$(date +'%Y')|" src/components/Footer.vue
-sed -i 's|"author": "imsyy"|"author": "APP_COPYRIGHT"|' package.json
-sed -i 's|"github": "https://github.com/imsyy"|"github": "APP_COPYRIGHT_URL"|' package.json
+# sed -i "s|Copyright By|$(date +'%Y')|" src/components/Footer.vue
+# sed -i 's|"author": "imsyy"|"author": "APP_COPYRIGHT"|' package.json
+# sed -i 's|"github": "https://github.com/imsyy"|"github": "APP_COPYRIGHT_URL"|' package.json
 
-echo "VITE_GLOBAL_API=/api" >.env
-echo "VITE_ICP=APP_ICP" >>.env
-echo "VITE_DIR=/" >>.env
+# echo "VITE_GLOBAL_API=/api" >.env
+# echo "VITE_ICP=APP_ICP" >>.env
+# echo "VITE_DIR=/" >>.env
 
-[ -d node_modules ] || npm i
-[ -d dist ] || npm run build
+# [ -d node_modules ] || npm i
+# [ -d dist ] || npm run build
 
-mv dist /var/www/front
-rm -rf /var/www/front-build
+# mv dist /var/www/front
+# rm -rf /var/www/front-build
 
 ######
 
