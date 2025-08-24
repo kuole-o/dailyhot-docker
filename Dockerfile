@@ -1,21 +1,19 @@
 FROM node:alpine
 
-LABEL version="1.0.3" \
+LABEL version="1.0.4" \
       maintainer="guole.fun@qq.com"
 
-# 设置时区和语言环境，解决中文乱码问题
-RUN apk add --no-cache tzdata musl-locales \
+# 设置时区
+RUN apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 
-# 基础环境变量
+# 环境变量
 ENV LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN.UTF-8 \
     LC_ALL=zh_CN.UTF-8 \
-    NODE_ENV=production
-
-ENV APP_ICP=\
+    APP_ICP=\
     APP_COPYRIGHT=Example\
     APP_COPYRIGHT_URL=http://www.example.org\
     USE_LOG_FILE=true\
