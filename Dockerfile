@@ -1,6 +1,6 @@
 FROM node:alpine
 
-LABEL version="1.0.9" \
+LABEL version="1.0.10" \
       maintainer="guole.fun@qq.com"
 
 # 设置时区
@@ -11,6 +11,11 @@ RUN apk add --no-cache tzdata \
 
 # 启用内存过量使用（解决 Redis 警告）
 RUN echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+
+# 复制package.json并提取版本号
+COPY package.json /tmp/package.json
+RUN APP_VERSION=$(node -p "require('/tmp/package.json').version") && \
+    echo "export app_version=$APP_VERSION" > /tmp/app_version
 
 # 环境变量
 ENV LANG=en_US.UTF-8 \
@@ -31,6 +36,10 @@ ENV LANG=en_US.UTF-8 \
 
 ADD initfs /tmp
 RUN sh /tmp/deploy
+
+# 设置app_version环境变量
+RUN cat /tmp/app_version >> /etc/profile && \
+    echo "app_version=$(node -p "require('/tmp/package.json').version")" >> /etc/environment
 
 VOLUME [ "/logs" ]
 ENTRYPOINT ["/sbin/entrypoint"]
