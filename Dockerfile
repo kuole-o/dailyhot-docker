@@ -12,11 +12,11 @@ RUN apk add --no-cache tzdata \
 # 启用内存过量使用（解决 Redis 警告）
 RUN echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
 
-# 复制package.json并提取版本号
+# 复制 package.json
 COPY package.json /tmp/package.json
 
-# 先提取版本号到环境变量
-RUN export APP_VERSION=$(node -p "require('/tmp/package.json').version") && \
+# 提取版本号并设置环境变量
+RUN APP_VERSION=$(node -p "require('/tmp/package.json').version") && \
     echo "APP_VERSION=$APP_VERSION" >> /etc/environment
 
 # 环境变量
@@ -33,9 +33,7 @@ ENV LANG=en_US.UTF-8 \
     UMAMI_USER_PASSWORD='password' \
     UMAMI_TOKEN='' \
     LEANCLOUD_APPID='' \
-    LEANCLOUD_APPKEY='' \
-    APP_VERSION=$APP_VERSION
-
+    LEANCLOUD_APPKEY='' 
 
 ADD initfs /tmp
 RUN sh /tmp/deploy
