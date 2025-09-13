@@ -14,8 +14,10 @@ RUN echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
 
 # 复制package.json并提取版本号
 COPY package.json /tmp/package.json
-RUN APP_VERSION=$(node -p "require('/tmp/package.json').version") && \
-    echo "export app_version=$APP_VERSION" > /tmp/app_version
+
+# 先提取版本号到环境变量
+RUN export APP_VERSION=$(node -p "require('/tmp/package.json').version") && \
+    echo "APP_VERSION=$APP_VERSION" >> /etc/environment
 
 # 环境变量
 ENV LANG=en_US.UTF-8 \
@@ -31,15 +33,12 @@ ENV LANG=en_US.UTF-8 \
     UMAMI_USER_PASSWORD='password' \
     UMAMI_TOKEN='' \
     LEANCLOUD_APPID='' \
-    LEANCLOUD_APPKEY=''
+    LEANCLOUD_APPKEY='' \
+    APP_VERSION=$APP_VERSION
 
 
 ADD initfs /tmp
 RUN sh /tmp/deploy
-
-# 设置app_version环境变量
-RUN cat /tmp/app_version >> /etc/profile && \
-    echo "app_version=$(node -p "require('/tmp/package.json').version")" >> /etc/environment
 
 VOLUME [ "/logs" ]
 ENTRYPOINT ["/sbin/entrypoint"]

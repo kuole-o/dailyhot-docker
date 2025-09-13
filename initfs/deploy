@@ -61,6 +61,4 @@ rm -rf /var/www/api-build
 ######
 
 # 保留app_version文件
-mv /tmp/app_version /tmp/app_version.bak
 rm -rf /tmp/*
-mv /tmp/app_version.bak /tmp/app_version
